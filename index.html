@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const Heading = ({ level, text }) => {
+      if (level == 1)
+        return <h1 className="heading">{text}</h1>
+      else if (level == 2)
+        return <h2 className="heading">{text}</h2>
+
+      return <h1 className="heading">{text}</h1>
+    }
+
+    const Icon = ({ iconName, onClickHandler }) => {
+      return (<span className={`icon ${iconName}`} onClick={onClickHandler} />)
+    }
+
+    const ModalHeader = () =>
+      (
+        <div className="modal-header">
+          <Heading text="Modal Header" />
+          <Icon iconName="cross" onClickHandler={() => console.log('working')} />
+        </div>
+      )
+
+    const Slider = ({ images }) => {
+      return (
+        <div className="slider-container">
+          <Icon iconName="left-arrow" />
+          <img src={images[0]} alt="slider-image" width="100px" />
+          <Icon iconName="right-arrow" />
+        </div>
+      )
+    }
+
+    const ModalBody = () => {
+      const images = [`./images/cross.png`, ""]
+      return (
+        <div className="modal-body">
+          <Slider images={images} />
+          <Heading level="2" text="Sub Heading" />
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati nam numquam dolorem, repellat ullam ad placeat excepturi commodi atque vel, voluptates possimus saepe illo aliquid officiis ratione natus quam ut.
+          </p>
+          <button>Book </button>
+        </div>
+      )
+    }
+
+    const Modal = () =>
+      (
+        <div className="modal-container">
+          <ModalHeader />
+          <ModalBody />
+        </div>
+      )
+
+    const root = document.getElementById('root')
+    ReactDOM.render(<Modal />, root)
+  </script>
+</body>
+
+</html>
